@@ -1,5 +1,5 @@
 import express from "express";
-import { generalError, notFoundError } from "./controllers/errors";
+import { generalError, notFoundError } from "./middlewares/errors";
 
 const app = express();
 
