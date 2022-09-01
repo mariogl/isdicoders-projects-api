@@ -1,4 +1,4 @@
-interface ErrorWithCode extends Error {
+interface ErrorWithCode {
   code: string;
 }
 

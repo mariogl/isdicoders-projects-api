@@ -1,8 +1,8 @@
 import "../loadEnvironment";
 import chalk from "chalk";
 import Debug from "debug";
-import ErrorWithCode from "../types/errors";
 import app from ".";
+import CustomError from "../utils/CustomError";
 
 const debug = Debug("isdicoders-projects:server:startServer");
 
@@ -13,7 +13,7 @@ const startServer = (port: number) =>
       resolve(true);
     });
 
-    server.on("error", (error: ErrorWithCode) => {
+    server.on("error", (error: CustomError) => {
       debug(chalk.red("Error setting up the server"));
       if (error.code === "EADDRINUSE") {
         debug(chalk.red(`Port ${port} in use`));
