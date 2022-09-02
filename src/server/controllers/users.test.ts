@@ -4,7 +4,7 @@ import registerUser from "./users";
 
 describe("Given a registerUser controller", () => {
   describe("When it receives", () => {
-    test("Then it should", () => {
+    test("Then it should", async () => {
       const req = {
         body: mockUserCredentials,
       } as Partial<Request>;
@@ -14,7 +14,7 @@ describe("Given a registerUser controller", () => {
       } as Partial<Response>;
       const expectedStatus = 201;
 
-      registerUser(req as Request, res as Response);
+      await registerUser(req as Request, res as Response);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
       expect(res.json).toHaveBeenCalledWith({
