@@ -2,6 +2,7 @@ import "../../loadEnvironment";
 import chalk from "chalk";
 import Debug from "debug";
 import { NextFunction, Request, Response } from "express";
+import { ValidationError } from "express-validation";
 import CustomError from "../../utils/CustomError";
 
 const debug = Debug("isdicoders-projects:server:middlewares/errors");
@@ -25,7 +26,14 @@ export const generalError = (
   next: NextFunction
 ) => {
   const status = error.statusCode ?? 500;
-  const message = error.publicMessage ?? "Server error";
+  let message = error.publicMessage ?? "Server error";
+
+  if (error instanceof ValidationError) {
+    error.details.body.forEach((errorDetail) => {
+      debug(chalk.red(errorDetail.message));
+      message = "Wrong data received";
+    });
+  }
 
   debug(chalk.red(error.message));
 
