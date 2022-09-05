@@ -1,9 +1,10 @@
+import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../../database/models/User";
 import CustomError from "../../utils/CustomError";
 
-const registerUser = async (
+export const registerUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -36,4 +37,44 @@ const registerUser = async (
   }
 };
 
-export default registerUser;
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      const error = new CustomError(
+        403,
+        "username doesn't exist",
+        "Wrong credentials"
+      );
+
+      throw error;
+    }
+
+    try {
+      await bcrypt.compare(password, user.password);
+    } catch {
+      const error = new CustomError(403, "Wrong password", "Wrong credentials");
+      throw error;
+    }
+
+    const userDataForToken = {
+      id: user.id,
+      name: user.name,
+    };
+
+    const token = jwt.sign(userDataForToken, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.status(200).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};

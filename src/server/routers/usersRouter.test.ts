@@ -2,7 +2,7 @@ import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import app from "..";
-import mockUserCredentials from "../mocks/users";
+import { mockUserCredentials } from "../mocks/users";
 import paths from "../paths";
 import connectDB from "../../database";
 import User from "../../database/models/User";
