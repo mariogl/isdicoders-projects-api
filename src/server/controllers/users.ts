@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../../database/models/User";
 import CustomError from "../../utils/CustomError";
+import env from "../../loadEnvironment";
 
 export const registerUser = async (
   req: Request,
@@ -69,7 +70,7 @@ export const loginUser = async (
       name: user.name,
     };
 
-    const token = jwt.sign(userDataForToken, process.env.JWT_SECRET, {
+    const token = jwt.sign(userDataForToken, env.jwtSecret, {
       expiresIn: "1d",
     });
 

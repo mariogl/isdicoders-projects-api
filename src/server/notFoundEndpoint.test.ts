@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "..";
+import app from ".";
 
 describe("Given a GET /test endpoint", () => {
   describe("When it receives a request", () => {

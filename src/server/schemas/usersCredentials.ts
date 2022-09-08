@@ -1,7 +1,7 @@
 import { Joi } from "express-validation";
 import userDataConstants from "../../utils/userDataConstants";
 
-const registerUserCredentials = {
+export const registerUserCredentials = {
   body: Joi.object({
     name: Joi.string().required(),
     username: Joi.string().min(userDataConstants.username.min).required(),
@@ -17,4 +17,9 @@ const registerUserCredentials = {
   }),
 };
 
-export default registerUserCredentials;
+export const loginUserCredentials = {
+  body: Joi.object({
+    username: Joi.string(),
+    password: Joi.string(),
+  }),
+};

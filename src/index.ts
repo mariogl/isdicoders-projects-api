@@ -1,12 +1,13 @@
 import connectDB from "./database";
+import env from "./loadEnvironment";
 import startServer from "./server/startServer";
 
-const port = +process.env.PORT || 4004;
+const port = +env.serverPort || 4004;
 
 (async () => {
   try {
     await startServer(port);
-    await connectDB(process.env.MONGODB_CONNECTION);
+    await connectDB(env.mongoDBConnection);
   } catch {
     process.exit(1);
   }
