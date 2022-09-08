@@ -5,6 +5,10 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  ALLOWED_ORIGINS: ${{ secrets.ALLOWED_ORIGINS }}
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -19,6 +23,3 @@ jobs:
         run: npm run test:coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
