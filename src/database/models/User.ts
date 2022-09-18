@@ -1,7 +1,8 @@
 import { model, Schema } from "mongoose";
+import { IUser } from "../../types/interfaces";
 import userDataConstants from "../../utils/userDataConstants";
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
   name: {
     type: String,
     require: true,
