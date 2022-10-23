@@ -39,7 +39,7 @@ describe("Given a POST /users/register", () => {
   describe("When it receives valid credentials", () => {
     test("Then it should respond with 201 and a message", async () => {
       await request(app)
-        .post(paths.users + paths.registerUser)
+        .post(paths.users.registerUser)
         .send(mockUserCredentials)
         .expect(201);
     });
@@ -50,7 +50,7 @@ describe("Given a POST /users/register", () => {
       mockUserCredentials.password = "aaa";
 
       await request(app)
-        .post(paths.users + paths.registerUser)
+        .post(paths.users.registerUser)
         .send(mockUserCredentials)
         .expect(400);
     });
@@ -59,7 +59,7 @@ describe("Given a POST /users/register", () => {
   describe("When it receives an existing user", () => {
     test("Then it should respond with 409 and 'Existing username or email'", async () => {
       const { body } = await request(app)
-        .post(paths.users + paths.registerUser)
+        .post(paths.users.registerUser)
         .send(existingUser)
         .expect(409);
 

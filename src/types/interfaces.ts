@@ -26,3 +26,9 @@ export interface IProject {
     front: string;
   };
 }
+
+export interface IChallenge {
+  name: string;
+  week: number;
+  number: string;
+}

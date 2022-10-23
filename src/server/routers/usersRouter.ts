@@ -10,13 +10,13 @@ import {
 const usersRouter = express.Router();
 
 usersRouter.post(
-  paths.registerUser,
+  paths.users.registerUser,
   validate(registerUserCredentials, {}, { abortEarly: false }),
   registerUser
 );
 
 usersRouter.post(
-  paths.loginUser,
+  paths.users.loginUser,
   validate(loginUserCredentials, {}, { abortEarly: false }),
   loginUser
 );
