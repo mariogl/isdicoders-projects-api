@@ -1,6 +1,6 @@
 import express from "express";
 import { validate } from "express-validation";
-import { loginUser, registerUser } from "../controllers/users";
+import { getUsers, loginUser, registerUser } from "../controllers/users";
 import paths from "../paths";
 import {
   loginUserCredentials,
@@ -8,6 +8,8 @@ import {
 } from "../schemas/usersCredentials";
 
 const usersRouter = express.Router();
+
+usersRouter.get("/", getUsers);
 
 usersRouter.post(
   paths.users.registerUser,

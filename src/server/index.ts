@@ -8,6 +8,7 @@ import usersRouter from "./routers/usersRouter";
 import env from "../loadEnvironment";
 import CustomError from "../utils/CustomError";
 import challengesRouter from "./routers/challengesRouter";
+import projectsRouter from "./routers/projectsRouter";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(mongoSanitize());
 
 app.use(paths.users.root, usersRouter);
 app.use(paths.challenges.root, challengesRouter);
+app.use(paths.projects.root, projectsRouter);
 
 app.use(notFoundError);
 app.use(generalError);

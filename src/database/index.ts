@@ -11,7 +11,7 @@ const connectDB = (mongoURL: string) =>
     mongoose.set("toJSON", {
       virtuals: true,
       transform(doc, ret) {
-        const newRet = { ...ret };
+        const newRet: any = { ...ret };
         // eslint-disable-next-line no-underscore-dangle
         delete newRet._id;
         // eslint-disable-next-line no-underscore-dangle

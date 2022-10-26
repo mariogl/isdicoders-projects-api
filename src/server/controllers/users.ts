@@ -5,6 +5,20 @@ import User from "../../database/models/User";
 import CustomError from "../../utils/CustomError";
 import env from "../../loadEnvironment";
 
+export const getUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await User.find();
+
+    res.status(200).json({ users });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const registerUser = async (
   req: Request,
   res: Response,
