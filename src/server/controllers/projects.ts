@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Project from "../../database/models/Project";
+import sonarService from "./sonarService";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getProjectsByChallengeId = async (
@@ -21,9 +22,22 @@ export const getProjectsByChallengeId = async (
 
     const projects = await Project.find(query)
       .sort({ student: 1 })
-      .populate("tutor", "-password -username");
+      .populate("tutor", "-password -username")
+      .lean();
 
-    res.json({ projects });
+    let resultProjects = await sonarService(projects);
+
+    if (byCoverage === "high" || byCoverage === "low") {
+      resultProjects = resultProjects.filter((resultProject) =>
+        byCoverage === "low"
+          ? resultProject.sonarInfoFront.coverage < 80 ||
+            resultProject.sonarInfoBack.coverage < 80
+          : resultProject.sonarInfoFront.coverage >= 80 ||
+            resultProject.sonarInfoBack.coverage >= 80
+      );
+    }
+
+    res.json({ projects: resultProjects });
   } catch (error) {
     next(error);
   }

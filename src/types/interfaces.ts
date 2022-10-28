@@ -8,6 +8,7 @@ export interface IUser {
 }
 
 export interface IProject {
+  id?: string;
   name: string;
   challenge: Types.ObjectId;
   student: string;
@@ -24,6 +25,12 @@ export interface IProject {
   sonarKey: {
     back: string;
     front: string;
+  };
+  sonarInfoFront: {
+    coverage: number;
+  };
+  sonarInfoBack: {
+    coverage: number;
   };
 }
 
