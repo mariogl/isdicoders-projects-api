@@ -52,19 +52,19 @@ const sonarService = async (projects: IProject[]) => {
 
       debtFront = measuresFront.find(
         (measure: any) => measure.metric === "sqale_index"
-      ).value;
+      )?.value;
 
       codeSmellsFront = measuresFront.find(
         (measure: any) => measure.metric === "code_smells"
-      ).value;
+      )?.value;
 
       bugsFront = measuresFront.find(
         (measure: any) => measure.metric === "bugs"
-      ).value;
+      )?.value;
 
       vulnerabilitiesFront = measuresFront.find(
         (measure: any) => measure.metric === "vulnerabilities"
-      ).value;
+      )?.value;
 
       coverageFront = measuresFront.find(
         (measure: any) => measure.metric === "coverage"
@@ -72,7 +72,7 @@ const sonarService = async (projects: IProject[]) => {
 
       securityHotspotsFront = measuresFront.find(
         (measure: any) => measure.metric === "security_hotspots"
-      ).value;
+      )?.value;
     }
 
     if (project.sonarKey.back) {
@@ -81,19 +81,19 @@ const sonarService = async (projects: IProject[]) => {
 
       debtBack = measuresBack.find(
         (measure: any) => measure.metric === "sqale_index"
-      ).value;
+      )?.value;
 
       codeSmellsBack = measuresBack.find(
         (measure: any) => measure.metric === "code_smells"
-      ).value;
+      )?.value;
 
       bugsBack = measuresBack.find(
         (measure: any) => measure.metric === "bugs"
-      ).value;
+      )?.value;
 
       vulnerabilitiesBack = measuresBack.find(
         (measure: any) => measure.metric === "vulnerabilities"
-      ).value;
+      )?.value;
 
       coverageBack = measuresBack.find(
         (measure: any) => measure.metric === "coverage"
@@ -101,7 +101,7 @@ const sonarService = async (projects: IProject[]) => {
 
       securityHotspotsBack = measuresBack.find(
         (measure: any) => measure.metric === "security_hotspots"
-      ).value;
+      )?.value;
     }
 
     let transformedProject;

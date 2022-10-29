@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Project from "../../database/models/Project";
-import sonarService from "./sonarService";
+import sonarService from "../services/sonarService";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getProjectsByChallengeId = async (
@@ -30,10 +30,10 @@ export const getProjectsByChallengeId = async (
     if (byCoverage === "high" || byCoverage === "low") {
       resultProjects = resultProjects.filter((resultProject) =>
         byCoverage === "low"
-          ? resultProject.sonarInfoFront.coverage < 80 ||
-            resultProject.sonarInfoBack.coverage < 80
-          : resultProject.sonarInfoFront.coverage >= 80 ||
-            resultProject.sonarInfoBack.coverage >= 80
+          ? resultProject.sonarInfoFront?.coverage < 80 ||
+            resultProject.sonarInfoBack?.coverage < 80
+          : resultProject.sonarInfoFront?.coverage >= 80 ||
+            resultProject.sonarInfoBack?.coverage >= 80
       );
     }
 
