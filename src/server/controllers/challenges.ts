@@ -15,3 +15,18 @@ export const getChallenges = async (
     next(error);
   }
 };
+
+export const getChallengeById = async (
+  req: Request<{ challengeId: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { challengeId } = req.params;
+    const challenge = await Challenge.findById(challengeId);
+
+    res.json({ challenge });
+  } catch (error) {
+    next(error);
+  }
+};
